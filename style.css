@@ -3,3 +3,20 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.new-book-form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: min-content;
+  border-radius: 10px;
+  background-color: #ddd;
+  gap: 10px;
+}
+
+.new-book-form ul {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 10px;
+}
