@@ -1,7 +1,12 @@
 const libraryDiv = document.querySelector('.library');
 const newBookButton = document.querySelector('.new-book');
 const newBookForm = document.querySelector('.new-book-form');
-const formInputs = document.querySelectorAll('.new-book-form input');
+// const formInputs = document.querySelectorAll('.new-book-form input');
+const formTitle = document.querySelector('input#title');
+const formAuthor = document.querySelector('input#author');
+const formPages = document.querySelector('input#pages');
+const formIsRead = document.querySelector('input#is-read');
+
 const addBookButton = document.querySelector('.add-book');
 let myLibrary = [];
 
@@ -33,22 +38,26 @@ function Book(title, author, pages, isRead) {
 }
 
 function addBookToLibrary(event, book) {
-  if (book) {
-    myLibrary.push(book);
-  } else {
-    formInputs.forEach((entry) => {
-      entry.type === 'checkbox'
-        ? console.log(entry.name, entry.checked)
-        : console.log(entry.name, entry.value);
-    });
+  if (book) myLibrary.push(book);
+  if (!book) {
+    let newBook = new Book(formTitle.value, formAuthor.value, formPages.value, formIsRead.checked);
+    myLibrary.push(newBook);
   }
+  updateLibrary();
 }
 
 function updateLibrary() {
+  clearLibrary();
   myLibrary.forEach((book) => {
     const tag = document.createElement('li');
     const text = document.createTextNode(book.info());
     tag.appendChild(text);
     libraryDiv.appendChild(tag);
   });
+}
+
+function clearLibrary() {
+  while (libraryDiv.firstChild) {
+    libraryDiv.removeChild(libraryDiv.firstChild);
+  }
 }
