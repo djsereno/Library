@@ -2,6 +2,7 @@ const libraryDiv = document.querySelector('.library');
 const newBookButton = document.querySelector('.new-book');
 const newBookForm = document.querySelector('.new-book-form');
 // const formInputs = document.querySelectorAll('.new-book-form input');
+const formClose = document.querySelector('.new-book-form .close');
 const formTitle = document.querySelector('input#title');
 const formAuthor = document.querySelector('input#author');
 const formPages = document.querySelector('input#pages');
@@ -22,8 +23,10 @@ console.log(theHobbit.info());
 console.log(harryPotter.info());
 console.log(romeoAndJuliet.info());
 
-// newBookButton.addEventListener('click', displayForm);
+newBookButton.addEventListener('click', showForm);
 addBookButton.addEventListener('click', addBookToLibrary);
+formClose.addEventListener('click', hideForm);
+
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -43,6 +46,8 @@ function addBookToLibrary(event, book) {
     let newBook = new Book(formTitle.value, formAuthor.value, formPages.value, formIsRead.checked);
     myLibrary.push(newBook);
   }
+  // hideForm();
+  clearForm();
   updateLibrary();
 }
 
@@ -60,4 +65,19 @@ function clearLibrary() {
   while (libraryDiv.firstChild) {
     libraryDiv.removeChild(libraryDiv.firstChild);
   }
+}
+
+function showForm() {
+  newBookForm.classList.add('show');
+}
+
+function hideForm() {
+  newBookForm.classList.remove('show');
+}
+
+function clearForm() {
+  formTitle.value = null;
+  formAuthor.value = null;
+  formPages.value = null;
+  formIsRead.checked = false;
 }
