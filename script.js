@@ -14,7 +14,7 @@ let myLibrary = [];
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
 const harryPotter = new Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 341, true);
 const romeoAndJuliet = new Book('Romeo and Juliet', 'Shakespeare', 201, false);
-const tomSawyer = new Book('The Adventure of Tom Sawyer', 'Mark Twain', 356, true);
+const tomSawyer = new Book('The Adventure of Tom Sawyer', 'Mark Twain', 356, false);
 
 addBookToLibrary(theHobbit);
 addBookToLibrary(harryPotter);
@@ -74,24 +74,37 @@ function createBookCard(book) {
   book.read ? (readBtn.innerText = 'Read') : (readBtn.innerText = 'Not Read');
   removeBtn.innerText = 'Remove';
 
+  bookCard.setAttribute('data-index', libraryContainer.childElementCount);
+  readBtn.addEventListener('click', toggleReadStatus);
+  removeBtn.addEventListener('click', removeBook);
+
   bookCard.appendChild(titleTag);
   detailsTag.appendChild(authorTag);
   detailsTag.appendChild(pagesTag);
   bookCard.appendChild(detailsTag);
   bookCard.appendChild(readBtn);
   bookCard.appendChild(removeBtn);
-
-  removeBtn.setAttribute('data-index', libraryContainer.childElementCount);
-  removeBtn.addEventListener('click', removeBook);
-
   return bookCard;
 }
 
+function toggleReadStatus(event) {
+  const readBtn = event.currentTarget;
+  const index = getBookIndex(readBtn);
+  myLibrary[index].read = !myLibrary[index].read;
+  myLibrary[index].read ? (readBtn.innerText = 'Read') : (readBtn.innerText = 'Not Read');
+  readBtn.classList.toggle('unread');
+}
+
 function removeBook(event) {
-  const index = event.currentTarget.getAttribute('data-index');
+  console.log(event);
+  const index = getBookIndex(event.currentTarget);
   myLibrary.splice(index, 1);
   refreshLibrary();
   console.table(myLibrary);
+}
+
+function getBookIndex(node) {
+  return node.parentElement.getAttribute('data-index');
 }
 
 function refreshLibrary() {
