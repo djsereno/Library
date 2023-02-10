@@ -1,69 +1,95 @@
-const libraryDiv = document.querySelector('.library');
+const libraryContainer = document.querySelector('.library');
 const newBookButton = document.querySelector('.new-book');
 const newBookForm = document.querySelector('.new-book-form');
-// const formInputs = document.querySelectorAll('.new-book-form input');
+
 const formClose = document.querySelector('.new-book-form .close');
 const formTitle = document.querySelector('input#title');
 const formAuthor = document.querySelector('input#author');
 const formPages = document.querySelector('input#pages');
-const formIsRead = document.querySelector('input#is-read');
+const formRead = document.querySelector('input#read');
 
 const addBookButton = document.querySelector('.add-book');
 let myLibrary = [];
 
-// let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
-// let harryPotter = new Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 341, true);
-// let romeoAndJuliet = new Book('Romeo and Juliet', 'Shakespeare', 201, false);
-// addBookToLibrary(false, theHobbit);
-// addBookToLibrary(false, harryPotter);
-// addBookToLibrary(false, romeoAndJuliet);
-// updateLibrary();
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
+const harryPotter = new Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 341, true);
+const romeoAndJuliet = new Book('Romeo and Juliet', 'Shakespeare', 201, false);
+const tomSawyer = new Book('The Adventure of Tom Sawyer', 'Mark Twain', 356, true);
 
-// console.log(theHobbit.info());
-// console.log(harryPotter.info());
-// console.log(romeoAndJuliet.info());
+addBookToLibrary(theHobbit);
+addBookToLibrary(harryPotter);
+addBookToLibrary(romeoAndJuliet);
+addBookToLibrary(tomSawyer);
 
 newBookButton.addEventListener('click', showForm);
-addBookButton.addEventListener('click', createBookCard);
+addBookButton.addEventListener('click', addBookFromForm);
 formClose.addEventListener('click', hideForm);
 
-function Book(title, author, pages, isRead) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.isRead = isRead;
+  this.read = read;
   this.info = () => {
     let string = this.title + ' by ' + this.author + ', ' + this.pages + ' pages, ';
-    this.isRead ? (string += 'read') : (string += 'not read yet');
+    this.read ? (string += 'read') : (string += 'not read yet');
     return string;
   };
 }
 
-function addBookToLibrary(event, book) {
-  if (book) myLibrary.push(book);
-  if (!book) {
-    let newBook = new Book(formTitle.value, formAuthor.value, formPages.value, formIsRead.checked);
-    myLibrary.push(newBook);
-  }
-  // hideForm();
+function addBookFromForm() {
+  const book = new Book(formTitle.value, formAuthor.value, formPages.value, formRead.checked);
+  addBookToLibrary(book);
+  hideForm();
   clearForm();
-  createBookCard(newBook);
-  // updateLibrary();
 }
 
-function updateLibrary() {
-  // clearLibrary();
+function addBookToLibrary(book) {
+  myLibrary.push(book);
+  const bookCard = createBookCard(book);
+  libraryContainer.appendChild(bookCard);
+}
+
+function createBookCard(book) {
+  const bookCard = document.createElement('li');
+  const titleTag = document.createElement('h2');
+  const detailsTag = document.createElement('ul');
+  const authorTag = document.createElement('li');
+  const pagesTag = document.createElement('li');
+  const readTag = document.createElement('li');
+
+  bookCard.classList.add('book');
+  titleTag.classList.add('title');
+  detailsTag.classList.add('book-details');
+  authorTag.classList.add('author');
+  pagesTag.classList.add('pages');
+  readTag.classList.add('read');
+
+  titleTag.innerText = book.title;
+  authorTag.innerText = 'by ' + book.author;
+  pagesTag.innerText = book.pages + ' pages';
+  book.read ? (readTag.innerText = 'Read') : (readTag.innerText = 'Not Read');
+
+  bookCard.appendChild(titleTag);
+  detailsTag.appendChild(authorTag);
+  detailsTag.appendChild(pagesTag);
+  detailsTag.appendChild(readTag);
+  bookCard.appendChild(detailsTag);
+
+  return bookCard;
+}
+
+function refreshLibrary() {
+  clearLibrary();
   myLibrary.forEach((book) => {
-    const tag = document.createElement('li');
-    const text = document.createTextNode(book.info());
-    tag.appendChild(text);
-    libraryDiv.appendChild(tag);
+    const bookCard = createBookCard(book);
+    libraryContainer.appendChild(bookCard);
   });
 }
 
 function clearLibrary() {
-  while (libraryDiv.firstChild) {
-    libraryDiv.removeChild(libraryDiv.firstChild);
+  while (libraryContainer.firstChild) {
+    libraryContainer.removeChild(libraryContainer.firstChild);
   }
 }
 
@@ -79,18 +105,5 @@ function clearForm() {
   formTitle.value = null;
   formAuthor.value = null;
   formPages.value = null;
-  formIsRead.checked = false;
-}
-
-function createBookCard(book) {
-  const bookProps = ['title', 'author', 'pages', 'isRead'];
-  const bookCard = document.createElement('ul');
-  bookProps.forEach((prop) => {
-    const content = document.createElement('li');
-    const text = document.createTextNode(book[prop]);
-    content.appendChild(text);
-    bookCard.appendChild(content);
-  });
-  libraryDiv.appendChild(bookCard);
-  return bookCard;
+  formRead.checked = false;
 }
