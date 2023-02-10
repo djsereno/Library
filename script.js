@@ -56,7 +56,7 @@ function createBookCard(book) {
   const detailsTag = document.createElement('ul');
   const authorTag = document.createElement('li');
   const pagesTag = document.createElement('li');
-  const readTag = document.createElement('li');
+  const readBtn = document.createElement('button');
   const removeBtn = document.createElement('button');
 
   bookCard.classList.add('book');
@@ -64,20 +64,21 @@ function createBookCard(book) {
   detailsTag.classList.add('book-details');
   authorTag.classList.add('author');
   pagesTag.classList.add('pages');
-  readTag.classList.add('read');
+  readBtn.classList.add('button', 'read');
+  if (!book.read) readBtn.classList.add('unread');
   removeBtn.classList.add('button', 'remove');
 
   titleTag.innerText = book.title;
   authorTag.innerText = 'by ' + book.author;
   pagesTag.innerText = book.pages + ' pages';
-  book.read ? (readTag.innerText = 'Read') : (readTag.innerText = 'Not Read');
+  book.read ? (readBtn.innerText = 'Read') : (readBtn.innerText = 'Not Read');
   removeBtn.innerText = 'Remove';
 
   bookCard.appendChild(titleTag);
   detailsTag.appendChild(authorTag);
   detailsTag.appendChild(pagesTag);
-  detailsTag.appendChild(readTag);
   bookCard.appendChild(detailsTag);
+  bookCard.appendChild(readBtn);
   bookCard.appendChild(removeBtn);
 
   removeBtn.setAttribute('data-index', libraryContainer.childElementCount);
@@ -90,7 +91,7 @@ function removeBook(event) {
   const index = event.currentTarget.getAttribute('data-index');
   myLibrary.splice(index, 1);
   refreshLibrary();
-  console.table(myLibrary)
+  console.table(myLibrary);
 }
 
 function refreshLibrary() {

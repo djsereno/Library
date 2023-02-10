@@ -23,7 +23,7 @@
   position: relative;
   padding: 20px;
   display: grid;
-  grid-template-rows: 1fr min-content min-content;
+  grid-template-rows: 1fr repeat(3, min-content);
   align-items: center;
   text-align: center;
   border-radius: 10px;
@@ -45,16 +45,24 @@
   font-style: italic;
 }
 
+.read,
 .remove {
   padding: 10px;
   border: none;
   border-radius: 10px;
-  background-color: rgb(255, 183, 183);
   font-size: 1.2rem;
 }
 
-.remove:hover {
-  filter: brightness(110%);
+.read {
+  background-color: rgb(183, 255, 177);
+}
+
+.read.unread {
+  background-color: rgb(107, 187, 243);
+}
+
+.remove {
+  background-color: rgb(255, 183, 183);
 }
 
 /* NEW BOOK FORM STYLES */
