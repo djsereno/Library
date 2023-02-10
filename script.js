@@ -28,7 +28,7 @@ formClose.addEventListener('click', hideForm);
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
-  this.pages = pages;
+  this.pages = +pages;
   this.read = read;
   this.info = () => {
     let string = this.title + ' by ' + this.author + ', ' + this.pages + ' pages, ';
@@ -80,7 +80,17 @@ function createBookCard(book) {
   bookCard.appendChild(detailsTag);
   bookCard.appendChild(removeBtn);
 
+  removeBtn.setAttribute('data-index', libraryContainer.childElementCount);
+  removeBtn.addEventListener('click', removeBook);
+
   return bookCard;
+}
+
+function removeBook(event) {
+  const index = event.currentTarget.getAttribute('data-index');
+  myLibrary.splice(index, 1);
+  refreshLibrary();
+  console.table(myLibrary)
 }
 
 function refreshLibrary() {
