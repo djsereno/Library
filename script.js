@@ -24,9 +24,8 @@ let myLibrary = [];
 // console.log(romeoAndJuliet.info());
 
 newBookButton.addEventListener('click', showForm);
-addBookButton.addEventListener('click', addBookToLibrary);
+addBookButton.addEventListener('click', createBookCard);
 formClose.addEventListener('click', hideForm);
-
 
 function Book(title, author, pages, isRead) {
   this.title = title;
@@ -48,7 +47,8 @@ function addBookToLibrary(event, book) {
   }
   // hideForm();
   clearForm();
-  updateLibrary();
+  createBookCard(newBook);
+  // updateLibrary();
 }
 
 function updateLibrary() {
@@ -83,8 +83,14 @@ function clearForm() {
 }
 
 function createBookCard(book) {
-  const tag = document.createElement('li');
-  const text = document.createTextNode(book.info());
-  tag.appendChild(text);
-  libraryDiv.appendChild(tag);
+  const bookProps = ['title', 'author', 'pages', 'isRead'];
+  const bookCard = document.createElement('ul');
+  bookProps.forEach((prop) => {
+    const content = document.createElement('li');
+    const text = document.createTextNode(book[prop]);
+    content.appendChild(text);
+    bookCard.appendChild(content);
+  });
+  libraryDiv.appendChild(bookCard);
+  return bookCard;
 }
