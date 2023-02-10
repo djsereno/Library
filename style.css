@@ -7,6 +7,44 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.page-container {
+  margin: auto;
+  width: min(900px, 80%);
+}
+
+.library {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.book {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ddd;
+  gap: 10px;
+  list-style: none;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.book-details {
+  font-size: 1.2rem;
+  list-style: none;
+}
+
+.pages {
+  font-style: italic;
+}
+
+/* NEW BOOK FORM STYLES */
+
 .new-book-form {
   display: none;
 }
@@ -76,39 +114,4 @@
 
 .new-book-form .add-book:hover {
   filter: brightness(110%);
-}
-
-.library-container {
-  margin: auto;
-  width: min(900px, 80%);
-}
-
-.library {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 10px;
-}
-
-.book {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: #ddd;
-  gap: 10px;
-  list-style: none;
-}
-
-.book * {
-  font-size: 1.2rem;
-}
-
-.book .title {
-  font-weight: bold;
-}
-
-.book .pages {
-  font-style: italic;
 }
