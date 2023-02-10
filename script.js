@@ -57,6 +57,7 @@ function createBookCard(book) {
   const authorTag = document.createElement('li');
   const pagesTag = document.createElement('li');
   const readTag = document.createElement('li');
+  const removeBtn = document.createElement('button');
 
   bookCard.classList.add('book');
   titleTag.classList.add('title');
@@ -64,17 +65,20 @@ function createBookCard(book) {
   authorTag.classList.add('author');
   pagesTag.classList.add('pages');
   readTag.classList.add('read');
+  removeBtn.classList.add('button', 'remove');
 
   titleTag.innerText = book.title;
   authorTag.innerText = 'by ' + book.author;
   pagesTag.innerText = book.pages + ' pages';
   book.read ? (readTag.innerText = 'Read') : (readTag.innerText = 'Not Read');
+  removeBtn.innerText = 'Remove';
 
   bookCard.appendChild(titleTag);
   detailsTag.appendChild(authorTag);
   detailsTag.appendChild(pagesTag);
   detailsTag.appendChild(readTag);
   bookCard.appendChild(detailsTag);
+  bookCard.appendChild(removeBtn);
 
   return bookCard;
 }
