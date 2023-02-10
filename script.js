@@ -11,17 +11,17 @@ const formIsRead = document.querySelector('input#is-read');
 const addBookButton = document.querySelector('.add-book');
 let myLibrary = [];
 
-let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
-let harryPotter = new Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 341, true);
-let romeoAndJuliet = new Book('Romeo and Juliet', 'Shakespeare', 201, false);
-addBookToLibrary(false, theHobbit);
-addBookToLibrary(false, harryPotter);
-addBookToLibrary(false, romeoAndJuliet);
-updateLibrary();
+// let theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
+// let harryPotter = new Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 341, true);
+// let romeoAndJuliet = new Book('Romeo and Juliet', 'Shakespeare', 201, false);
+// addBookToLibrary(false, theHobbit);
+// addBookToLibrary(false, harryPotter);
+// addBookToLibrary(false, romeoAndJuliet);
+// updateLibrary();
 
-console.log(theHobbit.info());
-console.log(harryPotter.info());
-console.log(romeoAndJuliet.info());
+// console.log(theHobbit.info());
+// console.log(harryPotter.info());
+// console.log(romeoAndJuliet.info());
 
 newBookButton.addEventListener('click', showForm);
 addBookButton.addEventListener('click', addBookToLibrary);
@@ -52,7 +52,7 @@ function addBookToLibrary(event, book) {
 }
 
 function updateLibrary() {
-  clearLibrary();
+  // clearLibrary();
   myLibrary.forEach((book) => {
     const tag = document.createElement('li');
     const text = document.createTextNode(book.info());
@@ -80,4 +80,11 @@ function clearForm() {
   formAuthor.value = null;
   formPages.value = null;
   formIsRead.checked = false;
+}
+
+function createBookCard(book) {
+  const tag = document.createElement('li');
+  const text = document.createTextNode(book.info());
+  tag.appendChild(text);
+  libraryDiv.appendChild(tag);
 }
