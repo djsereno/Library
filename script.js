@@ -13,7 +13,7 @@ let myLibrary = [];
 
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
 const harryPotter = new Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 341, true);
-const romeoAndJuliet = new Book('Romeo and Juliet', 'Shakespeare', 201, false);
+const romeoAndJuliet = new Book('Romeo and Juliet', 'William Shakespeare', 201, false);
 const tomSawyer = new Book('The Adventure of Tom Sawyer', 'Mark Twain', 356, false);
 
 addBookToLibrary(theHobbit);

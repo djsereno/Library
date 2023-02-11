@@ -156,3 +156,66 @@ button:hover {
   filter: brightness(110%);
   cursor: pointer;
 }
+
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  height: 50px;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  background-color: grey;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+footer .center-container {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+footer .right-container {
+  grid-column: 3;
+  display: flex;
+  justify-content: end;
+  align-items: flex-end;
+  padding: 5px;
+}
+
+footer .right-container a {
+  font-size: small;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+footer a,
+footer a:hover,
+footer a:visited,
+footer a:active {
+  color: white;
+  text-decoration: none;
+}
+
+footer i {
+  font-size: 1.6em;
+  color: white;
+}
+
+footer a.icon:hover {
+  transform: scale(1.1);
+}
+
+footer a.circled i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 0.8em;
+  background-color: white;
+  color: grey;
+  font-size: 1em;
+}
