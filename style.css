@@ -14,8 +14,8 @@
   --color-font-primary: #ccc;
   --color-bg-read: #3b4f4d;
   --color-font-read: #60c097;
-  --color-bg-unread: #c5c5c5;
-  --color-font-unread: #4f4f4f;
+  --color-bg-unread: #ccc;
+  --color-font-unread: #181d23;
   --color-bg-remove: #4d383f;
   --color-font-remove: #b45251;
 }
@@ -24,9 +24,29 @@ body {
   background-color: var(--color-background);
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-font-primary);
+}
+
+input,
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+}
+
+button:hover {
+  filter: brightness(110%);
+  cursor: pointer;
+}
+
+/* HEADER STYLES */
+
 header {
   padding: 0 calc((100vw - min(1200px, 80%)) / 2);
-  min-height: 150px;
+  height: 150px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,18 +54,19 @@ header {
   font-size: x-large;
 }
 
-.page-container {
-  margin: auto;
-  padding: 50px 0;
-  width: min(1200px, 80%);
-}
-
-.new-book {
-  width: max-content;
+button.new-book {
   border: none;
   background-color: var(--color-background);
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+/* BODY */
+
+.page-container {
+  margin: auto;
+  padding: 50px 0;
+  width: min(1200px, 80%);
 }
 
 .library {
@@ -56,21 +77,19 @@ header {
   gap: 40px;
 }
 
+/* BOOK CARD */
+
 .book {
   position: relative;
   padding: 20px;
   display: grid;
   grid-template-rows: 1fr repeat(3, min-content);
   align-items: center;
-  text-align: center;
+  gap: 10px;
   background-color: var(--color-accent);
   border-radius: 10px;
-  gap: 10px;
+  text-align: center;
   list-style: none;
-}
-
-.title {
-  font-weight: bold;
 }
 
 .book-details {
@@ -84,9 +103,7 @@ header {
 
 .read,
 .remove {
-  padding: 10px;
   border: none;
-  border-radius: 10px;
   font-size: 1.2rem;
 }
 
@@ -106,7 +123,7 @@ header {
   color: var(--color-font-remove);
 }
 
-/* NEW BOOK FORM STYLES */
+/* ADD BOOK FORM */
 
 .overlay {
   display: none;
@@ -114,13 +131,13 @@ header {
 
 .overlay.show {
   position: absolute;
-  display: block;
   z-index: 1;
-  top: 0;
+  display: block;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
   width: 100vw;
   height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .new-book-form {
@@ -132,14 +149,14 @@ header {
   top: 50vh;
   left: 50vw;
   transform: translate(-50%, -50%);
+  padding: 20px;
+  width: min-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
-  width: min-content;
+  gap: 10px;
   border-radius: 10px;
   background-color: var(--color-accent);
-  gap: 10px;
 }
 
 .new-book-form .form-header {
@@ -148,20 +165,32 @@ header {
 }
 
 .new-book-form .close {
-  border: none;
   height: 1em;
   width: 1em;
+  display: flex;
+  place-content: center;
+  border: none;
   background-color: transparent;
   color: var(--color-font-primary);
   line-height: 0;
 }
 
-.new-book-form .close:hover {
-  color: var(--color-font-primary);
+.new-book-form .inputs {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  place-items: center;
+  gap: 10px;
+  list-style: none;
 }
 
-.new-book-form li,
+.new-book-form .input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .new-book-form input,
+.new-book-form label,
 .new-book-form button {
   font-size: 1.2rem;
 }
@@ -169,56 +198,30 @@ header {
 .new-book-form input,
 .new-book-form button {
   background-color: var(--color-background);
-  border: none;
-  border-radius: 10px;
 }
 
-.new-book-form ul {
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  place-items: center;
-  list-style: none;
-  gap: 10px;
+input[type='checkbox'] {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
-.new-book-form li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.new-book-form .add-book {
+button.add-book {
   background-color: var(--color-background);
   color: var(--color-font-primary);
   font-weight: bold;
 }
 
-.new-book-form input,
-.button {
-  padding: 10px;
-  border-radius: 8px;
-}
-
-input[type="checkbox"] {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-
-button:hover {
-  filter: brightness(110%);
-  cursor: pointer;
-}
+/* FOOTER */
 
 footer {
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  height: 50px;
-  bottom: 0;
-  position: fixed;
-  width: 100%;
   background-color: var(--color-accent);
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 1.2rem;
 }
 
 footer .center-container {
@@ -230,23 +233,26 @@ footer .center-container {
 }
 
 footer .right-container {
+  padding: 5px;
   grid-column: 3;
   display: flex;
   justify-content: end;
   align-items: flex-end;
-  padding: 5px;
 }
 
 footer .right-container a {
-  font-size: small;
   color: rgba(255, 255, 255, 0.3);
+  font-size: 0.8rem;
 }
 
 footer a,
-footer a:hover,
-footer a:visited,
-footer a:active {
+footer a:visited {
   text-decoration: none;
+}
+
+footer a:hover,
+footer a:active {
+  text-decoration: underline;
 }
 
 footer i {
@@ -258,19 +264,13 @@ footer a.icon:hover {
 }
 
 footer a.circled i {
+  height: 1.6em;
+  width: 1.6em;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1.6em;
-  height: 1.6em;
   border-radius: 0.8em;
   background-color: var(--color-font-primary);
   color: var(--color-accent);
   font-size: 1em;
-}
-
-a:focus-visible,
-button:focus-visible,
-input:focus-visible {
-  outline: 2px solid var(--color-font-primary);
 }
