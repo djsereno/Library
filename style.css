@@ -109,11 +109,27 @@ header {
 
 /* NEW BOOK FORM STYLES */
 
+.overlay {
+  display: none;
+}
+
+.overlay.show {
+  position: absolute;
+  display: block;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .7);
+  width: 100vw;
+  height: 100vh;
+}
+
+
 .new-book-form {
   display: none;
 }
 
-.new-book-form.show {
+.overlay.show .new-book-form {
   position: absolute;
   top: 50vh;
   left: 50vw;
@@ -253,3 +269,4 @@ button:focus,
 input:focus {
   outline: 2px solid var(--color-font-primary);
 }
+

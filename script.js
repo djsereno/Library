@@ -1,6 +1,8 @@
 const libraryContainer = document.querySelector('.library');
 const newBookButton = document.querySelector('.new-book');
 const newBookForm = document.querySelector('.new-book-form');
+const formOverlay = document.querySelector('.overlay');
+
 
 const formClose = document.querySelector('.new-book-form .close');
 const formTitle = document.querySelector('input#title');
@@ -122,11 +124,11 @@ function clearLibrary() {
 }
 
 function showForm() {
-  newBookForm.classList.add('show');
+  formOverlay.classList.add('show');
 }
 
 function hideForm() {
-  newBookForm.classList.remove('show');
+  formOverlay.classList.remove('show');
 }
 
 function clearForm() {
