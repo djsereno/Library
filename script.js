@@ -3,7 +3,6 @@ const newBookButton = document.querySelector('.new-book');
 const newBookForm = document.querySelector('.new-book-form');
 const formOverlay = document.querySelector('.overlay');
 
-
 const formClose = document.querySelector('.new-book-form .close');
 const formTitle = document.querySelector('input#title');
 const formAuthor = document.querySelector('input#author');
@@ -40,6 +39,11 @@ function Book(title, author, pages, read) {
 }
 
 function addBookFromForm() {
+  if (!newBookForm.checkValidity()) {
+    newBookForm.reportValidity();
+    return;
+  }
+
   const book = new Book(formTitle.value, formAuthor.value, formPages.value, formRead.checked);
   addBookToLibrary(book);
   hideForm();
