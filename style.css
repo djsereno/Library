@@ -14,8 +14,8 @@
   --color-font-primary: #ccc;
   --color-bg-read: #3b4f4d;
   --color-font-read: #60c097;
-  --color-bg-unread: #4f4f4f;
-  --color-font-unread: #c5c5c5;
+  --color-bg-unread: #c5c5c5;
+  --color-font-unread: #4f4f4f;
   --color-bg-remove: #4d383f;
   --color-font-remove: #b45251;
 }
@@ -93,7 +93,7 @@ header {
 .read {
   background-color: var(--color-bg-read);
   color: var(--color-font-read);
-  transition: background-color 0.5s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .read.unread {
@@ -118,11 +118,10 @@ header {
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, .7);
+  background-color: rgba(0, 0, 0, 0.7);
   width: 100vw;
   height: 100vh;
 }
-
 
 .new-book-form {
   display: none;
@@ -198,6 +197,11 @@ header {
 .button {
   padding: 10px;
   border-radius: 8px;
+}
+
+input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
 }
 
 button:hover {
