@@ -1,30 +1,31 @@
-const libraryContainer = document.querySelector('.library');
 const newBookButton = document.querySelector('.new-book');
-const newBookForm = document.querySelector('.new-book-form');
+const libraryContainer = document.querySelector('.library');
 const formOverlay = document.querySelector('.overlay');
+const newBookForm = document.querySelector('.new-book-form');
 
 const formClose = document.querySelector('.new-book-form .close');
 const formTitle = document.querySelector('input#title');
 const formAuthor = document.querySelector('input#author');
 const formPages = document.querySelector('input#pages');
 const formRead = document.querySelector('input#read');
-
 const addBookButton = document.querySelector('.add-book');
-let myLibrary = [];
 
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, true);
-const harryPotter = new Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling', 341, true);
-const romeoAndJuliet = new Book('Romeo and Juliet', 'William Shakespeare', 201, false);
-const tomSawyer = new Book('The Adventure of Tom Sawyer', 'Mark Twain', 356, false);
-
-addBookToLibrary(theHobbit);
-addBookToLibrary(harryPotter);
-addBookToLibrary(romeoAndJuliet);
-addBookToLibrary(tomSawyer);
-
+const myLibrary = [];
 newBookButton.addEventListener('click', showForm);
 addBookButton.addEventListener('click', addBookFromForm);
 formClose.addEventListener('click', hideForm);
+
+// Sample content
+
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 320, true);
+const prideAndPrejudice = new Book('Pride & Prejudice', 'Jane Austin', 520, true);
+const grapesOfWrath = new Book('The Grapes of Wrath', 'John Steinbeck', 464, false);
+const slaughterhouseFive = new Book('Slaughterhouse-Five', 'Kurt Vonnegut', 224, true);
+
+addBookToLibrary(theHobbit);
+addBookToLibrary(prideAndPrejudice);
+addBookToLibrary(grapesOfWrath);
+addBookToLibrary(slaughterhouseFive);
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -43,7 +44,6 @@ function addBookFromForm() {
     newBookForm.reportValidity();
     return;
   }
-
   const book = new Book(formTitle.value, formAuthor.value, formPages.value, formRead.checked);
   addBookToLibrary(book);
   hideForm();
@@ -90,6 +90,7 @@ function createBookCard(book) {
   bookCard.appendChild(detailsTag);
   bookCard.appendChild(readBtn);
   bookCard.appendChild(removeBtn);
+
   return bookCard;
 }
 
@@ -102,15 +103,9 @@ function toggleReadStatus(event) {
 }
 
 function removeBook(event) {
-  console.log(event);
   const index = getBookIndex(event.currentTarget);
   myLibrary.splice(index, 1);
   refreshLibrary();
-  console.table(myLibrary);
-}
-
-function getBookIndex(node) {
-  return node.parentElement.getAttribute('data-index');
 }
 
 function refreshLibrary() {
@@ -140,4 +135,8 @@ function clearForm() {
   formAuthor.value = null;
   formPages.value = null;
   formRead.checked = false;
+}
+
+function getBookIndex(node) {
+  return node.parentElement.getAttribute('data-index');
 }
