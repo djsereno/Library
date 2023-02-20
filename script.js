@@ -1,3 +1,17 @@
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = +pages;
+    this.read = read;
+    this.info = () => {
+      let string = this.title + ' by ' + this.author + ', ' + this.pages + ' pages, ';
+      this.read ? (string += 'read') : (string += 'not read yet');
+      return string;
+    };
+  }
+}
+
 const newBookButton = document.querySelector('.new-book');
 const libraryContainer = document.querySelector('.library');
 const formOverlay = document.querySelector('.overlay');
@@ -26,18 +40,6 @@ addBookToLibrary(theHobbit);
 addBookToLibrary(prideAndPrejudice);
 addBookToLibrary(grapesOfWrath);
 addBookToLibrary(slaughterhouseFive);
-
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = +pages;
-  this.read = read;
-  this.info = () => {
-    let string = this.title + ' by ' + this.author + ', ' + this.pages + ' pages, ';
-    this.read ? (string += 'read') : (string += 'not read yet');
-    return string;
-  };
-}
 
 function addBookFromForm() {
   if (!newBookForm.checkValidity()) {
